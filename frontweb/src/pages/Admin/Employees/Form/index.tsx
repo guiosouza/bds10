@@ -1,9 +1,13 @@
+import { useHistory } from 'react-router-dom'
 import './styles.css';
 
 const Form = () => {
 
+  const history = useHistory();
+
   const handleCancel = () => {
     // to do
+    history.push('/admin/employees');
   };
 
   return (
@@ -16,7 +20,7 @@ const Form = () => {
             <div className="col employee-crud-inputs-left-container">
 
               <div className="margin-bottom-30">
-                <input type="text" 
+                <input type="text"
                   className="form-control base-input is-invalid"
                 />
                 <div className="invalid-feedback d-block">
@@ -25,11 +29,11 @@ const Form = () => {
               </div>
 
               <div className="margin-bottom-30">
-                <input type="text" 
+                <input type="text"
                   className="form-control base-input"
                 />
                 <div className="invalid-feedback d-block">
-                  
+
                 </div>
               </div>
 
