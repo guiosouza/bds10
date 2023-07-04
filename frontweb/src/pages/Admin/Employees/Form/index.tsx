@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom'
-//import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Select from 'react-select';
 import { useState, useEffect } from 'react'
 import { Department } from 'types/department'
@@ -38,7 +38,23 @@ const Form = () => {
     history.push('/admin/employees');
   };
 
-  const onSubmit = () => {
+  const onSubmit = (formData: Employee) => {
+    const data = formData;
+    const config: AxiosRequestConfig = {
+      method: 'POST',
+      url: '/employees',
+      data: data,
+      withCredentials: true
+    };
+    console.log(formData)
+
+    requestBackend(config).then(() => {
+      toast.info('Cadastrado com sucesso');
+      history.push('/admin/employees');
+    })
+    .catch(() => {
+      toast.error('Erro ao cadastrar produto');
+    });
   };
 
   return (
@@ -58,6 +74,7 @@ const Form = () => {
                   className={`form-control base-input ${errors.name ? 'is-invalid' : ''
                     }`}
                   name="name"
+                  data-testid="name"
                   placeholder='Nome do funcionário'
                 />
                 <div className="invalid-feedback d-block">
@@ -74,6 +91,7 @@ const Form = () => {
                   className={`form-control base-input ${errors.email ? 'is-invalid' : ''
                     }`}
                   name="email"
+                  data-testid="email"
                   placeholder='Email do funcionário'
                 />
                 <div className="invalid-feedback d-block">
