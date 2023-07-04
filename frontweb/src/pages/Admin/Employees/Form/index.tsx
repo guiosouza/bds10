@@ -46,7 +46,6 @@ const Form = () => {
       data: data,
       withCredentials: true
     };
-    console.log(formData)
 
     requestBackend(config).then(() => {
       toast.info('Cadastrado com sucesso');
